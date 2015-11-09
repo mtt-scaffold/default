@@ -1,0 +1,12 @@
+{
+  "name": "mtt-jello-demo",
+  "version": "0.0.0",
+  "description": "mtt-jello-demo",
+  "keywords": [
+    "mtt-jello-demo"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "mtt": "0.0.1"
+  }
+}
