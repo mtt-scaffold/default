@@ -1,0 +1,76 @@
+#set($subPage = "template")
+
+#extends("./index.vm")
+  #block("inner-content")
+  <div class="demo-section">
+    <h2>前端模版</h2>
+    <p>
+      MTT默认使用<a href="https://github.com/aui/artTemplate">art-template</a>作为前端模版（简洁语法），
+      依赖<a href="https://github.com/TCL-MIE-CD/fis-parser-art-tmpl">fis-parser-art-tmpl</a>。
+    </p>
+    <p>
+      这里有个例子，供参考使用
+    </p>
+    <strong>_art.tmpl</strong>
+    <pre>
+{{if mtt}}
+&lt;h3&gt;Hello MTT&lt;/h3&gt;
+{{/if}}
+{{each list}}
+&lt;div&gt;{{$index}}. {{#$value.user | coloring}}&lt;/div&gt;
+{{/each}}
+</pre>
+    <strong>template.js</strong>
+      <pre>
+var $ = require("jquery"),
+    template = require("art-template");
+
+// 设置helper
+template.utils.$helpers.coloring = content => '&lt;span style="color:red"&gt;' + content + "&lt;/span&gt;";
+
+// 通过__inline获得预编译方法，并绑定utils上下文。
+var render = __inline("./_art.tmpl").bind(template.utils);
+
+var data = {
+  mtt: true,
+  list: [
+    {user: "@DevilZh"},
+    {user: "@irenexixi"},
+    {user: "@Luomando"},
+    {user: "@mmillet"}
+  ]
+};
+
+var html = render(data);
+
+$("#output").html(html);
+</pre>
+    <p>渲染到页面：</p>
+    <div id="output" class="output"></div>
+    <p>
+      上面这种方式会让模版内联js体积变大。如果某个预编译模版很大或需要复用，可以单独创建一个js来__inline，再暴露出来。<br/>
+    </p>
+    <p>
+      如这个例子：
+    </p>
+    <strong>//art.js</strong>
+    <pre>var template = require("art-template");
+
+// 设置helper
+template.utils.$helpers.coloring = content => '&lt;span style="color:red"&gt;' + content + "&lt;/span&gt;";
+
+module.exports = __inline("./_art.tmpl").bind(template.utils);
+</pre>
+    <strong>//template.js</strong>
+    <pre>//模版作为单独的js
+var artRender = require("/src/demo/art");
+var html = artRender({mtt: true});
+console.log(html);</pre>
+  </div>
+  #end
+
+  #require("/src/demo/template.less")
+  #script()
+    require(["/src/demo/template"]);
+  #end
+#end

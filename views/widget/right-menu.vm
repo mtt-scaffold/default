@@ -1,0 +1,15 @@
+#require("/src/widget/right-menu.less")
+
+<div class="right-menu">
+  <ul class="clearfix">
+    #foreach( $menu in $menus )
+    <li #if( $subPage == $menu.name )class="active"#end>
+      <a href="$!{request.contextPath}$!{menu.href}">$!{menu.label}</a>
+    </li>
+    #end
+  </ul>
+</div>
+
+#script()
+  require(["/src/widget/right-menu"])
+#end

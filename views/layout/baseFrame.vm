@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+#html("/static/requirejs/require.js")
+  #head()
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    #block("meta")
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    #end
+    <title>$!projectName</title>
+    #require("bootstrap/css/bootstrap.css")
+
+    <script>
+      window.CONFIG = {
+        contextPath: "$contextPath"
+      };
+    </script>
+  #end
+
+  #body()
+    <header>
+      #block("header")
+        #widget("/views/widget/head-nav.vm")
+      #end
+    </header>
+
+    <div class="container">
+      #block("content")
+      #end
+    </div>
+
+    <footer>
+      #block("footer")
+        #widget("/views/widget/footer.vm")
+      #end
+    </footer>
+  #end
+
+  #script()
+    require(["jquery", ])
+  #end
+#end

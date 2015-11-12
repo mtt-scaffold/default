@@ -1,0 +1,6 @@
+{{if mtt}}
+<h3>Hello MTT</h3>
+{{/if}}
+{{each list}}
+<div>{{$index}}. {{#$value.user | coloring}}</div>
+{{/each}}

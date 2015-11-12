@@ -1,0 +1,59 @@
+#set($subPage = "es6")
+
+#extends("./index.vm")
+  #block("inner-content")
+  <div class="demo-section">
+    <h2>ES6</h2>
+    <p>
+      项目中可以愉快的使用ES6，MTT会使用fis-parser-es6-babel进行ES6->ES5的转化。<br/>
+      Babel已经支持大部分的ES6语法转换，如果<br/>
+      ES6的基本使用文档在这里查看<a href="http://es6.ruanyifeng.com/">http://es6.ruanyifeng.com/</a>
+    </p>
+    <h3>创建ES6模块</h3>
+    <p>
+      这个例子创建了一个es6的模块，通过export来暴露接口。
+      <pre>var es6Alert = str => alert("mod es6 alert: " + str);
+const MOD_VERSION = "0.1.0";
+
+export {
+  es6Alert
+};
+
+export default MOD_VERSION;</pre>
+    </p>
+    <h3>创建ES6模块</h3>
+    <p>
+      这个例子来使用刚才创建的es6的模块，通过import来引入模块。<br/>
+      你甚至可以混用ES6（<code>import</code>）和commonjs（<code>require</code>）的加载方式来加载模块，如：
+      #set($code = "import VERSION, {es6Alert} from '/src/common/mod-es6.js';
+var modCommon = require('/src/common/mod-common.js');
+
+console.log('Current mod version is:', VERSION);
+
+class Test {
+  constructor($ele, name) {
+    this.${esc.d}me = $ele;
+    this.name = name;
+    this.bindEvent();
+  }
+  bindEvent() {
+    this.${esc.d}me.on('click', () => {
+      es6Alert(this.name);
+      modCommon(this.name);
+    })
+  }
+}
+
+var test = new Test($('#test-es6'), 'Have a try');")
+      <pre>$esc.html($code)</pre>
+    </p>
+    <p>
+      <a id="test-es6" class="btn btn-primary">Have a try, click me</a>
+    </p>
+  </div>
+  #end
+
+  #script()
+    require(["/src/demo/es6"]);
+  #end
+#end

@@ -1,0 +1,23 @@
+#extends("/views/layout/html5Frame.vm")
+  #block("content")
+    #widget("/views/widget/right-menu.vm")
+
+    <div class="demo">
+      #block("inner-content")
+      <div class="demo-section">
+        <h2>使用方法</h2>
+        <p>
+          这里有一些demo，将简单演示一些常用功能。<br/>
+          包括（
+          #foreach( $menu in $menus )
+            <strong>$menu.label</strong>
+          #end
+          )。<br/>
+        </p>
+      </div>
+      #end
+    </div>
+  #end
+
+  #require("/src/demo/demo.less")
+#end

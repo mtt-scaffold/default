@@ -1,0 +1,17 @@
+#set($subPage = "less")
+
+#extends("./index.vm")
+  #block("inner-content")
+  <div class="demo-section">
+    <h2>less</h2>
+    <p>
+      你可以大胆地使用less，并且强烈推荐使用。<br/>
+      并在vm/jsp/html中可以直接引入，引入时最好使用
+      <code>${esc.h}require("style.less")</code>方式引入
+      ，MTT都会自动处理。
+    </p>
+  </div>
+  #end
+
+  #require("/src/demo/demo.less")
+#end

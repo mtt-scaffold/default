@@ -1,0 +1,69 @@
+#set($subPage = "components")
+
+#extends("./index.vm")
+  #block("inner-content")
+    <div class="demo-section">
+      <h2>使用组件</h2>
+      <p>
+        这个demo演示如何使用组件<img src="/src/demo/img/yizhigou.gif"/>
+      </p>
+    </div>
+    <div class="demo-section">
+      <h3>关于组件</h3>
+      <p>
+        MTT默认使用AMD方式来加载组件，意味着在html/vm/jsp中引用时，需要<code>require(['modPath'])</code>方式来引入。<br/>
+        由于src目录中的所有js被标记为了mod，可以使用commonjs方式引入和暴露：<br/>
+        引入一个组件：<code>$esc.html("var $ = require('jquery')")</code>，<br/>
+        暴露一个对象：<code>$esc.html("module.exports = {name: 'hello'}")</code>
+
+        。
+      </p>
+      <h3>components</h3>
+      <p>
+        components目录中是符合<a href="https://github.com/fis-components/spec">fis-components</a>规范的组件，可以直接引入。<br/>
+        如引入jquery时，只需：<code>$esc.html("var $ = require('jquery')")</code><br/>
+        该目录由另一个项目维护，http://x，请使用git的submodule来引入。<br/>
+        组内的公共组件需要大家一起来贡献和维护。<br/>
+      </p>
+    </div>
+    <div class="demo-section">
+      <h3>common</h3>
+      <p>
+        使用自己写的公用组件，一般放在common目录中，引入时需要写清楚路径。<br/>
+        如引入了remove组件来删除某个dom元素：<br/>
+        <pre>
+$esc.html("var $ = require('jquery'),
+    remove = require('/src/common/remove');
+$('#test-remove').on('click', remove);")</pre>
+      </p>
+      <p>
+        <a class="btn btn-danger" id="test-remove">Have a try, click to remove me</a>
+      </p>
+      <p>
+        又如，我们要禁用掉右边菜单的自动悬浮和自动换页功能<br/>
+        <pre>var autoChangeMenu = require("/src/common/auto-change-menu");
+require("/src/common/auto-fix-top");
+
+$("#test-destroy").on("click", () => {
+  $(".right-menu").autoFixTop("destroy");
+  autoChangeMenu.unbind();
+});</pre>
+      </p>
+      <p>
+        <a class="btn btn-danger" id="test-destroy">Have a try, Stop right menu events</a>
+      </p>
+    </div>
+    <div class="demo-section">
+      <h3>其他三方组件引入（待补充）</h3>
+      <p>
+        三方组件的引入：<br/>
+        如果符合AMD规范？<br/>
+        如果不符合？
+      </p>
+    </div>
+  #end
+
+  #script()
+    require(["/src/demo/components.js"])
+  #end
+#end

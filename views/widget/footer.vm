@@ -1,0 +1,5 @@
+#require("/src/widget/footer.less")
+
+<p class="footer">
+  @copyright <a href="$!projectUrl">MTT</a>
+</p>

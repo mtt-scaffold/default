@@ -1,0 +1,15 @@
+#set($subPage = "i18n")
+
+#extends("./index.vm")
+  #block("inner-content")
+  <div class="demo-section">
+    <h2>国际化（待补充）</h2>
+    <p>
+      国际化统一使用后端gettext方式，......<br/>
+      整合到MTT，参考<a href="https://www.npmjs.com/package/fis-postpackager-tcli18n">https://www.npmjs.com/package/fis-postpackager-tcli18n</a>
+    </p>
+  </div>
+  #end
+
+  #require("/src/demo/demo.less")
+#end

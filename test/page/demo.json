@@ -1,0 +1,41 @@
+{
+  "page": "demo",
+  "subPage": "demo",
+  "menus": [
+    {
+      "label": "规范",
+      "name" : "path",
+      "href" : "/demo/path"
+    },
+    {
+      "label": "使用组件",
+      "name" : "components",
+      "href" : "/demo/components"
+    },
+    {
+      "label": "前端模版",
+      "name" : "template",
+      "href" : "/demo/template"
+    },
+    {
+      "label": "Ajax",
+      "name" : "ajax",
+      "href" : "/demo/ajax"
+    },
+    {
+      "label": "less",
+      "name" : "less",
+      "href" : "/demo/less"
+    },
+    {
+      "label": "ES6",
+      "name" : "es6",
+      "href" : "/demo/es6"
+    },
+    {
+      "label": "国际化",
+      "name" : "i18n",
+      "href" : "/demo/i18n"
+    }
+  ]
+}

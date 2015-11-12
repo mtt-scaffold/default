@@ -1,0 +1,21 @@
+#extends("/views/layout/html5Frame.vm")
+  #block("content")
+    <div class="jumbotron">
+      <h1>Hello, MTT!</h1>
+      <p>
+        <a href="$!projectUrl">MTT</a>是一个前端集成解决方案，基于<a href="https://github.com/fex-team/fis3">FIS3</a>。<br/>
+        这是她的一个默认手脚架，基于<a href="https://github.com/fex-team/fis3-jello">fis3-jello</a>，用于创建J2EE项目。<br/>
+        这里有jello的使用文档：<a href="https://github.com/fex-team/jello">jello</a>。<br/>
+        你可以访问<a href="https://github.com/mtt-scaffold">mtt-scaffold</a>获取更多的手脚架。
+      </p>
+      <h2>Todo</h2>
+      <p>
+        css js html的引入还不支持相对路径
+      </p>
+    </div>
+  #end
+
+  ##css依赖
+  #require("/src/home/home.css")
+#end
+

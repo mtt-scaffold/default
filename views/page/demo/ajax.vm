@@ -1,0 +1,20 @@
+#set($subPage = "ajax")
+
+#extends("./index.vm")
+  #block("inner-content")
+    <div class="demo-section">
+      <h2>Ajax</h2>
+      <p>
+        异步加载和FIS一样，模拟数据写在/test/data目录中。（todo：和mockjs整合）
+      </p>
+      <p>
+        <a id="load-data" class="btn btn-primary">Have a try, Load ajax data</a>
+      </p>
+      <pre id="data" class="hidden"></pre>
+    </div>
+  #end
+
+  #script()
+    require(["/src/demo/ajax.js"])
+  #end
+#end
