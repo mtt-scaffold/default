@@ -40,12 +40,12 @@ fis
   // src下的css和less
   .match('/src/(**.{less,css})', {
     release: '${namespace}/static/$1',
-    //useSprite: true,
-    //postprocessor: fis.plugin('autoprefixer', {
-    //  browsers: [
-    //    "last 4 versions"
-    //  ]
-    //})
+    useSprite: true,
+    postprocessor: fis.plugin('autoprefixer', {
+      browsers: [
+        "last 4 versions"
+      ]
+    })
   })
   .match('/components/**', {
     isMod: true
