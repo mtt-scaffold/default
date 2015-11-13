@@ -8,11 +8,11 @@ fis.set('namespace', '');
 
 // 开发环境配置
 fis
-   //使用相对路径 todo
-  .hook('relative')
-  .match('**', {
-    relative: true
-  })
+  //使用相对路径 todo
+  //.hook('relative')
+  //.match('**', {
+  //  relative: true
+  //})
 
   // src下的css和less配置autoprefixer
   .match('**.{less,css}', {
