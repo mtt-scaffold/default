@@ -6,7 +6,7 @@
     <h2>ES6</h2>
     <p>
       项目中可以愉快的使用ES6，MTT会使用fis-parser-es6-babel进行ES6->ES5的转化。<br/>
-      Babel已经支持大部分的ES6语法转换，如果<br/>
+      Babel已经支持大部分的ES6语法转换，除了这些（待补充）<br/>
       ES6的基本使用文档在这里查看<a href="http://es6.ruanyifeng.com/">http://es6.ruanyifeng.com/</a>
     </p>
     <h3>创建ES6模块</h3>

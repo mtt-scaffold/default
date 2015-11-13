@@ -1,99 +1,88 @@
-// 加载jello初始配置
-fis.require('jello')(fis);
+// 加载jello初始配置，这里加载的实际是mtt-jello
+fis.require("jello")(fis);
+
+// 项目的静态资源路径
+const STATICS = '/static';
+
+fis.set('namespace', '');
 
 // 开发环境配置
 fis
-  //不加md5
+   //使用相对路径 todo
+  .hook('relative')
   .match('**', {
-    useHash: false
+    relative: true
   })
-  // 忽略目录
-  .set('project.ignore', [
-    'node_modules/**',
-    '.idea/**',
-    '.git/**'
-  ])
-  // jello 里面默认用的 commonjs 这里改成 amd 方案。
-  .unhook('commonjs')
-  .hook('amd', {
-    packages: []
-  })
-  // 页面配置
-  .match(/^\/views\/(.*\.(jsp|vm|html))$/i, {
-    isMod: true,
-    url: '$1',
-    release: '${templates}/${namespace}/$1',
-    extras: {
-      isPage: true
-    }
-  })
-  // 标记src下的js为es6和模块化
-  .match('/src/(**.{js,es6,jsx})', {
-    parser: fis.plugin('es6-babel', {
-      //去掉严格模式，防止前端内联模版使用with时报错，参考：https://github.com/babel/babel/issues/388
-      //blacklist: ["useStrict"]
-    }),
-    release: '${namespace}/static/$1',
-    isMod: true,
-    rExt: '.js'
-  })
-  // src下的css和less
-  .match('/src/(**.{less,css})', {
-    release: '${namespace}/static/$1',
-    useSprite: true,
+
+  // src下的css和less配置autoprefixer
+  .match('**.{less,css}', {
     postprocessor: fis.plugin('autoprefixer', {
       browsers: [
         "last 4 versions"
       ]
     })
-  })
-  .match('/components/**', {
-    isMod: true
-  })
-  .match('/src/**.tmpl', {
-    parser: fis.plugin('art-tmpl'),
-    rExt: '.js'
-  })
-  // 使用相对路径 todo
-  .hook('relative')
-  .match('**', {
-    relative: true
   });
 
 // 生产环境
-var prod = function(fisMedia) {
-  fisMedia
-    .match('**.{js,es6,jsx}', {
-      optimizer: fis.plugin('uglify-js')
-    })
-    .match('**.{css,less}', {
-      optimizer: fis.plugin('clean-css')
-    })
+var mttProd = function(fisMedia) {
+  return fisMedia
     .match('::package', {
       // 关于打包配置，请参考：https://github.com/fex-team/fis3-packager-deps-pack
       packager: fis.plugin('deps-pack', {
-        '/static/pkg/base.css': [
+        [STATICS + '/pkg/base.css']: [
           '/components/bootstrap/css/bootstrap.css',
           '/src/common/common/**.less',
           '/src/widget/**.less'
         ],
-        '/static/pkg/boot.js': [
+        [STATICS + '/pkg/boot.js']: [
           '/static/requirejs/require.js',
           '/components/jquery/jquery.js'
         ],
-        '/static/pkg/common.js': [
+        [STATICS + '/pkg/common.js']: [
           '/src/common/**.js',
           '/src/common/**.js:deps',
           '/src/widget/**.js',
           '/src/widget/**.js:deps'
         ],
         // 业务逻辑打包，如果需要，在这里单独配置
-        '/static/pkg/demo/template.js': [
+        [STATICS + '/pkg/demo/template.js']: [
           '/src/demo/template.js',
           '/src/demo/template.js:deps'
         ]
       })
-    });
+    })
+    .match('*.{less,css,js}', {
+      useHash: true
+    })
+    .match('::image', {
+      useHash: true
+    })
 }
 
-prod(fis.media('prod'));
+// 生产环境
+mttProd(fis.media("prod"));
+
+// 本地部署
+// 这个方法决定是否需要部署
+var needDeploy = function(path) {
+  //比如没有用到的components不打包过去
+  if(/^\/static\/components\/underscore.*$/.test(path)) {
+    return false;
+  }
+  return true;
+}
+mttProd(fis.media("deploy"))
+  .match("**", {
+    deploy: [
+      function(options, modified, total, next) {
+        for(var i = modified.length - 1; i >= 0; i--) {
+          var path = modified[i].getHashRelease();
+          !needDeploy(path) && modified.splice(i, 1);
+        }
+        next();
+      },
+      fis.plugin('local-deliver', {
+        to: '../../mtt-deploy'
+      })
+    ]
+  });

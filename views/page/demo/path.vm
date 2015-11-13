@@ -4,13 +4,13 @@
   #block("inner-content")
     <div class="demo-section">
       <h2>规范</h2>
-      <ul class="l">
+      <ul>
         <li>前端源码和后端目录分离</li>
         <li>公共组件使用subtree/submodule来引入</li>
         <li>API路径不能写死，需要加contextPath，可在layout中定义好</li>
         <li>静态资源路径尽量使用相对路径，需要预留domain</li>
-        <li>项目打包</li>
-        <li>项目发布</li>
+        <li>node_modules目录会被MTT忽略，所以这里面只能存放开发时依赖devDependencies</li>
+        <li>项目打包和发布请参照mtt-conf.js</li>
         <li>
           具体目录规范请参考
           <a href="http://naotu.baidu.com/file/38202bb4b92125c0abfdfed38745cd9e?token=92383b833940561c">

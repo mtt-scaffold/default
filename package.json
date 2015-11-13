@@ -1,19 +1,20 @@
 {
   "name": "mtt-jello-demo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "mtt-jello-demo",
   "keywords": [
     "mtt-jello-demo"
   ],
   "license": "MIT",
   "devDependencies": {
-    "fis-parser-es6-babel": "0.0.2",
+    "mtt-jello": "0.0.1",
     "fis-parser-art-tmpl": "0.0.2",
+    "fis-parser-es6-babel": "0.0.2",
     "fis-parser-marked": "0.0.6",
     "fis-parser-utc": "0.0.2",
+    "fis-postprocessor-autoprefixer": "0.0.5",
     "fis3-hook-amd": "~0.1.2",
-    "fis3-jello": "~1.0.2",
     "fis3-packager-deps-pack": "~0.0.1",
-    "fis-postprocessor-autoprefixer": "0.0.5"
+    "fis-parser-art-tmpl": "0.0.3"
   }
 }
