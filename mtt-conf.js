@@ -25,31 +25,32 @@ fis
 
 // 生产环境
 var mttProd = function(fisMedia) {
+  var packagers = {};
+  packagers[STATICS + '/pkg/base.css'] = [
+    '/components/bootstrap/css/bootstrap.css',
+    '/src/common/common/**.less',
+    '/src/widget/**.less'
+  ];
+  packagers[STATICS + '/pkg/boot.js'] = [
+    '/static/requirejs/require.js',
+    '/components/jquery/jquery.js'
+  ];
+  packagers[STATICS + '/pkg/common.js'] = [
+    '/src/common/**.js',
+    '/src/common/**.js:deps',
+    '/src/widget/**.js',
+    '/src/widget/**.js:deps'
+  ];
+  // 业务逻辑打包，如果需要，在这里单独配置
+  packagers[STATICS + '/pkg/demo/template.js'] = [
+    '/src/demo/template.js',
+    '/src/demo/template.js:deps'
+  ];
+
   return fisMedia
     .match('::package', {
       // 关于打包配置，请参考：https://github.com/fex-team/fis3-packager-deps-pack
-      packager: fis.plugin('deps-pack', {
-        [STATICS + '/pkg/base.css']: [
-          '/components/bootstrap/css/bootstrap.css',
-          '/src/common/common/**.less',
-          '/src/widget/**.less'
-        ],
-        [STATICS + '/pkg/boot.js']: [
-          '/static/requirejs/require.js',
-          '/components/jquery/jquery.js'
-        ],
-        [STATICS + '/pkg/common.js']: [
-          '/src/common/**.js',
-          '/src/common/**.js:deps',
-          '/src/widget/**.js',
-          '/src/widget/**.js:deps'
-        ],
-        // 业务逻辑打包，如果需要，在这里单独配置
-        [STATICS + '/pkg/demo/template.js']: [
-          '/src/demo/template.js',
-          '/src/demo/template.js:deps'
-        ]
-      })
+      packager: fis.plugin('deps-pack', packagers)
     })
     .match('*.{less,css,js}', {
       useHash: true

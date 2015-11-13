@@ -1,13 +1,13 @@
 {
   "name": "mtt-jello-demo",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "mtt-jello-demo",
   "keywords": [
     "mtt-jello-demo"
   ],
   "license": "MIT",
   "devDependencies": {
-    "mtt-jello": "0.0.1",
+    "mtt-jello": "~0.0.2",
     "fis-parser-art-tmpl": "0.0.2",
     "fis-parser-es6-babel": "0.0.2",
     "fis-parser-marked": "0.0.6",

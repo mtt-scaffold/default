@@ -32,12 +32,12 @@ console.log('Current mod version is:', VERSION);
 
 class Test {
   constructor($ele, name) {
-    this.${esc.d}me = $ele;
+    this.$me = $ele;
     this.name = name;
     this.bindEvent();
   }
   bindEvent() {
-    this.${esc.d}me.on('click', () => {
+    this.$me .on('click', () => {
       es6Alert(this.name);
       modCommon(this.name);
     })
