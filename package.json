@@ -7,7 +7,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "mtt-jello": "~0.0.2",
+    "mtt-jello": "0.0.2",
     "fis-parser-art-tmpl": "0.0.2",
     "fis-parser-es6-babel": "0.0.2",
     "fis-parser-marked": "0.0.6",
