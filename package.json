@@ -15,6 +15,7 @@
     "fis-postprocessor-autoprefixer": "0.0.5",
     "fis3-hook-amd": "~0.1.2",
     "fis3-packager-deps-pack": "~0.0.1",
-    "fis-parser-art-tmpl": "0.0.3"
+    "fis-parser-art-tmpl": "0.0.3",
+    "fis3-preprocessor-extlang": "^1.1.7"
   }
 }
